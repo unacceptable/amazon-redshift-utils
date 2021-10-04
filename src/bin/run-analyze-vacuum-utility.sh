@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -e
 
 echo "Running analyze-vacuum utility"
@@ -51,27 +50,27 @@ else
     if [ "${QUERY_GROUP}" != "" ]; then QUERY_GROUP_CMD="--query_group ${QUERY_GROUP}"; fi
 
     python AnalyzeVacuumUtility/analyze-vacuum-schema.py \
-        --db ${DB} \
-        --db-user ${DB_USER} \
-        --db-pwd ${DB_PWD} \
-        --db-host ${DB_HOST} \
-        --db-port ${DB_PORT} \
-        --require-ssl ${REQUIRE_SSL} \
-        --schema-name ${SCHEMA_NAME} \
-        --debug ${DEBUG} \
-        --slot-count ${SLOT_COUNT} \
-        --ignore-errors ${IGNORE_ERRORS} \
-        --analyze-flag ${ANALYZE_FLAG} \
-        --vacuum-flag ${VACUUM_FLAG} \
-        --vacuum-parameter ${VACUUM_PARAMETER} \
-        --min-unsorted-pct ${MIN_UNSORTED_PCT} \
-        --max-unsorted-pct ${MAX_UNSORTED_PCT} \
-        --stats-off-pct ${STATS_OFF_PCT} \
-        --predicate-cols ${PREDICATE_COLS} \
-        --max-table-size-mb ${MAX_TABLE_SIZE_MB} \
-        --min-interleaved-skew ${MIN_INTERLEAVED_SKEW} \
-        --min-interleaved-cnt ${MIN_INTERLEAVED_CNT} \
-        --suppress-cloudwatch ${SUPPRESS_CLOUDWATCH} \
-        ${DB_CONN_OPTS_CMD} ${TABLE_NAME_CMD} ${BLACKLISTED_TABLES_CMD} ${OUTPUT_FILE_CMD} ${QUERY_GROUP_CMD}
+        --db "${DB}" \
+        --db-user "${DB_USER}" \
+        --db-pwd "${DB_PWD}" \
+        --db-host "${DB_HOST}" \
+        --db-port "${DB_PORT}" \
+        --require-ssl "${REQUIRE_SSL}" \
+        --schema-name "${SCHEMA_NAME}" \
+        --debug "${DEBUG}" \
+        --slot-count "${SLOT_COUNT}" \
+        --ignore-errors "${IGNORE_ERRORS}" \
+        --analyze-flag "${ANALYZE_FLAG}" \
+        --vacuum-flag "${VACUUM_FLAG}" \
+        --vacuum-parameter "${VACUUM_PARAMETER}" \
+        --min-unsorted-pct "${MIN_UNSORTED_PCT}" \
+        --max-unsorted-pct "${MAX_UNSORTED_PCT}" \
+        --stats-off-pct "${STATS_OFF_PCT}" \
+        --predicate-cols "${PREDICATE_COLS}" \
+        --max-table-size-mb "${MAX_TABLE_SIZE_MB}" \
+        --min-interleaved-skew "${MIN_INTERLEAVED_SKEW}" \
+        --min-interleaved-cnt "${MIN_INTERLEAVED_CNT}" \
+        --suppress-cloudwatch "${SUPPRESS_CLOUDWATCH}" \
+        "${DB_CONN_OPTS_CMD}" "${TABLE_NAME_CMD}" "${BLACKLISTED_TABLES_CMD}" "${OUTPUT_FILE_CMD}" "${QUERY_GROUP_CMD}"
     echo "done"
 fi

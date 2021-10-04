@@ -1,15 +1,21 @@
-FROM python:2-slim
+FROM python:alpine
 
-RUN apt-get update && mkdir -p /usr/share/man/man1 /usr/share/man/man7
-RUN apt-get install -y libpq-dev postgresql-client gcc
+ENV DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /usr/src/app
-COPY src/ /usr/src/app/
-RUN find /usr/src/app -name "*.py"|xargs chmod +x && find /usr/src/app -name "*.sh"|xargs chmod +x
+COPY ["src/", "."]
+RUN find "$PWD" -name "*.sh" -or -name "*.py" -print -exec chmod +x "{}" ";"
 
-ENV PATH="/usr/src/app/AnalyzeVacuumUtility:/usr/src/app/ColumnEncodingUtility:/usr/src/app/UnloadCopyUtility:${PATH}"
+RUN apk add libpq \
+        postgresql-client \
+        gcc \
+        libxml2 \
+        libxslt \
+        findutils
 
-RUN pip install -r /usr/src/app/requirements.txt && \
-    pip install -r /usr/src/app/UnloadCopyUtility/requirements.txt 
+RUN find "$PWD" \
+        -name "requirements.txt" \
+        -not -path "*libxml2*" \
+        -printf "INSTALLING REQUIREMENTS: %p\n" -exec pip install -r "{}" ";"
 
 ENTRYPOINT ["/usr/src/app/bin/entrypoint.sh"]

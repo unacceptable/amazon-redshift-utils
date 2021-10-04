@@ -50,23 +50,23 @@ else
     if [ "${STATEMENT_TIMEOUT}" != "" ]; then STATEMENT_TIMEOUT_CMD="--statement-timeout ${STATEMENT_TIMEOUT}"; fi
 
     python ColumnEncodingUtility/analyze-schema-compression.py \
-        --db ${DB} \
-        --db-user ${DB_USER} \
-        --db-pwd ${DB_PWD} \
-        --db-host ${DB_HOST} \
-        --db-port ${DB_PORT} \
-        --analyze-schema ${ANALYZE_SCHEMA} \
-        --target-schema ${TARGET_SCHEMA} \
-        --threads ${THREADS} \
-        --debug ${DEBUG} \
-        --do-execute ${DO_EXECUTE} \
-        --slot-count ${SLOT_COUNT} \
-        --ignore-errors ${IGNORE_ERRORS} \
-        --force ${FORCE} \
-        --drop-old-data ${DROP_OLD_DATA} \
-        --ssl-option ${SSL_OPTION} \
-        ${ANALYZE_TABLE_CMD} ${ANALYZE_COL_WIDTH_CMD} ${OUTPUT_FILE_CMD} ${COMP_ROWS_CMD} ${QUERY_GROUP_CMD} \
-        ${NEW_DIST_KEY_CMD} ${NEW_SORT_KEYS_CMD} ${STATEMENT_TIMEOUT_CMD}
+        --db "${DB}" \
+        --db-user "${DB_USER}" \
+        --db-pwd "${DB_PWD}" \
+        --db-host "${DB_HOST}" \
+        --db-port "${DB_PORT}" \
+        --analyze-schema "${ANALYZE_SCHEMA}" \
+        --target-schema "${TARGET_SCHEMA}" \
+        --threads "${THREADS}" \
+        --debug "${DEBUG}" \
+        --do-execute "${DO_EXECUTE}" \
+        --slot-count "${SLOT_COUNT}" \
+        --ignore-errors "${IGNORE_ERRORS}" \
+        --force "${FORCE}" \
+        --drop-old-data "${DROP_OLD_DATA}" \
+        --ssl-option "${SSL_OPTION}" \
+        "${ANALYZE_TABLE_CMD}" "${ANALYZE_COL_WIDTH_CMD}" "${OUTPUT_FILE_CMD}" "${COMP_ROWS_CMD}" "${QUERY_GROUP_CMD}" \
+        "${NEW_DIST_KEY_CMD}" "${NEW_SORT_KEYS_CMD}" "${STATEMENT_TIMEOUT_CMD}"
 
     echo "Done"
 fi

@@ -1,12 +1,49 @@
 #!/usr/bin/env bash
-
 set -e
 
-PROJECT=${1:-}
+export PATH="$(find "$PWD" -maxdepth 1 -mindepth 1 -not -path "*bin*" -type d -printf "%p:")${PATH}"
 
-if [ "${PROJECT}" == "analyze-vacuum" ]; then bin/run-analyze-vacuum-utility.sh
-elif [ "${PROJECT}" == "column-encoding" ]; then bin/run-column-encoding-utility.sh
-elif [ "${PROJECT}" == "unload-copy" ]; then bin/run-unload-copy-utility.sh
-elif [ "${PROJECT}" == "user-last-login" ]; then bin/run-user-last-login.sh
-else echo "Unhandled arg for project to run. Please select from either 'analyze-vacuum', 'column-encoding' or 'unload-copy'"
-fi
+# shellcheck disable=SC2120
+usage(){
+    EXIT=${1:-0}
+    cat <<EOF
+    Usage:
+        $0 <project>
+
+    Projects:
+        analyze-vacuum
+        column-encoding
+        upload-copy
+        user-last-login
+EOF
+
+    exit "$EXIT"
+}
+
+# shellcheck disable=SC2194
+
+main(){
+    # shellcheck disable=SC2034
+    PROJECT=${1:-"Not provided"}
+
+    case PROJECT in
+        analyze-vacuum)
+            bin/run-analyze-vacuum-utility.sh
+            ;;
+        column-encoding)
+            bin/run-column-encoding-utility.sh
+            ;;
+        unload-copy)
+            bin/run-unload-copy-utility.sh
+            ;;
+        user-last-login)
+            bin/run-user-last-login.sh
+            ;;
+        *)
+            echo "ERROR - Unhandled arg for project to run."
+            usage
+            ;;
+    esac
+}
+
+main "$@"
